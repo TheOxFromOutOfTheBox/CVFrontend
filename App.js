@@ -56,9 +56,7 @@ export default function App() {
         setCapturedImage(null)
         finalimg = ""
     }
-    // const __turnoffcam = async () => {
-    //     setStartCamera(false)
-    // }
+
     const updateImg = async (img) => {
         console.log("Hello\n")
         console.log(img.uri)
@@ -69,14 +67,11 @@ export default function App() {
         } catch (e) {
             console.log(e)
         }
-        // }
         console.log("In uppdateimg,finalimg=",finalimg)
         // setFinalImg(img.uri)
     }
     const [result,setResult]=useState("")
-    // const showResult=()=>{
 
-    // }
     const CameraPreview = (photo) => {
         console.log('sdsfds', photo)
         console.log(photo.photo.uri)
@@ -100,7 +95,7 @@ export default function App() {
                 <View style={{ alignItems: "center" }}>
                     <TouchableOpacity
                         onPress={__turnoffcam}>
-                        <Text>Hiigyuytf</Text>
+                        <Text>Close Window</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -108,8 +103,8 @@ export default function App() {
     }
     
 
-    const data = [["Reddit", "Facebook", "Meta"]]
-    const data1 = [["AOC", "KMH", "SHS"]]
+    const data = [["Hide and Seek","Colgate Herbal", "Dove Shampoo"]]
+    const data1 = [["Parle", "Colgate-Palmolive","Unilever"]]
     const __retakePicture = () => {
         setCapturedImage(null)
         setPreviewVisible(false)
@@ -131,14 +126,16 @@ export default function App() {
     if(value !== null) {
         // value previously stored
         const map1=new Map()
-        map1.set("Reddit",1)
-        map1.set("Facebook",2)
-        map1.set("Meta",3)
+        map1.set("Hide and Seek",1)
+        // map1.set("Dove Soap",2)
+        map1.set("Dove Shampoo",3)
         console.log(map1.get("Reddit"))
+        map1.set("Colgate Herbal",4)
         const map2=new Map()
-        map2.set("AOC",1)
-        map2.set("KMH",2)
-        map2.set("SHS",3)
+        map2.set("Parle",1)
+        // map2.set("Hindustan Unilever",2)
+        map2.set("Unilever",3)
+        map2.set("Colgate-Palmolive",4)
         var formdata=new FormData()
         formdata.append("companyID",map2.get(sel1))
         formdata.append("productID",map1.get(sel))
@@ -189,7 +186,7 @@ export default function App() {
                                     }}>
                                     <TouchableOpacity
                                         onPress={__turnoffcam}>
-                                        <Text>Hiigyuytf</Text>
+                                        <Text>Close Camera</Text>
                                     </TouchableOpacity>
                                 </View>
                                 <View
@@ -311,7 +308,25 @@ export default function App() {
                             />
                         </View>
                         <View style={{alignContent:"center",alignItems:"center"}}>
-                            <Text>{result}</Text>
+                            {
+                                result==""?
+                                (
+                                    <Text>Take an image and submit to get information ASAP!</Text>
+                                ):
+                                (
+                                    // <Text>Bye</Text>
+                                    result>20?
+                                        (
+                                        <Text>
+                                        Your product is a Genuine Product : ({result}%)
+                                        </Text>):
+                                        (
+                                        <Text>
+                                        Your product is a Fake Product : ({result}%)
+                                        </Text>)
+                                    
+                                )
+                            }
                         </View>
                     </View>
                 )}
